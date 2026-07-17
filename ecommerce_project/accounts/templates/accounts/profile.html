@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Mon profil{% endblock %}
+
+{% block content %}
+<h1>Mon profil</h1>
+
+<div class="card" style="max-width:520px;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Informations personnelles</h3>
+        {{ user_form.as_p }}
+
+        {% if vendor_form %}
+            <h3>Ma boutique</h3>
+            {{ vendor_form.as_p }}
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord vendeur{% endblock %}
+
+{% block content %}
+<h1>Bienvenue {{ user.vendor_profile.shop_name }} 🏪</h1>
+<p>Ceci est votre espace de gestion vendeur.</p>
+
+<div class="grid">
+    <div class="card">
+        <h3>📦 Mes produits</h3>
+        <p>Ajoutez, modifiez ou supprimez vos produits.</p>
+        <a href="{% url 'products:my_products' %}" class="btn btn-outline">Gérer mes produits</a>
+    </div>
+    <div class="card">
+        <h3>🧾 Commandes reçues</h3>
+        <p>Consultez et mettez à jour l'état des commandes.</p>
+        <a href="{% url 'orders:vendeur_order_list' %}" class="btn btn-outline">Voir les commandes</a>
+    </div>
+    <div class="card">
+        <h3>🏪 Ma boutique</h3>
+        <p>Modifiez les informations de votre boutique.</p>
+        <a href="{% url 'accounts:profile' %}" class="btn btn-outline">Modifier ma boutique</a>
+    </div>
+</div>
+{% endblock %}

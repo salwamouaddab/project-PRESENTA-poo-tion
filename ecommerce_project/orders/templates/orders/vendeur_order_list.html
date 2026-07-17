@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Commandes reçues{% endblock %}
+
+{% block content %}
+<h1>Commandes reçues</h1>
+
+{% if orders %}
+    {% for order, items in orders.items %}
+    <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Commande #{{ order.id }} — {{ order.client.username }}</h3>
+            <span class="status status-{{ order.status }}">{{ order.get_status_display }}</span>
+        </div>
+        <p style="color:var(--muted); font-size:0.85rem;">{{ order.created_at|date:"d/m/Y H:i" }} — Adresse : {{ order.shipping_address }}</p>
+        <table>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.quantity }} x {{ item.product.name }}</td>
+                <td>{{ item.subtotal }} DH</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <form method="post" action="{% url 'orders:update_order_status' order.id %}" style="display:flex; gap:0.5rem; margin-top:0.8rem;">
+            {% csrf_token %}
+            <select name="status" style="margin:0;">
+                {% for value, label in order.Status.choices %}
+                    <option value="{{ value }}" {% if order.status == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary btn-sm">Mettre à jour le statut</button>
+        </form>
+    </div>
+    {% endfor %}
+{% else %}
+<div class="empty-state">Vous n'avez reçu aucune commande pour le moment.</div>
+{% endif %}
+{% endblock %}

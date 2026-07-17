@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Passer la commande{% endblock %}
+
+{% block content %}
+<h1>Passer la commande</h1>
+
+<div class="card" style="max-width:500px;">
+    <h3>Récapitulatif</h3>
+    <table>
+        {% for item in cart.items.all %}
+        <tr>
+            <td>{{ item.quantity }} x {{ item.product.name }}</td>
+            <td>{{ item.subtotal }} DH</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><strong>Total : {{ cart.total }} DH</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="shipping_address">Adresse de livraison</label>
+        <input type="text" name="shipping_address" id="shipping_address" value="{{ user.address }}" required>
+        <button type="submit" class="btn btn-success">Confirmer la commande</button>
+    </form>
+</div>
+{% endblock %}

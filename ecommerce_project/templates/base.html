@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Boutique en ligne{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div>
+        <a href="{% url 'products:product_list' %}" class="brand">🛒 MaBoutique</a>
+    </div>
+    <div>
+        <a href="{% url 'products:product_list' %}">Catalogue</a>
+        {% if user.is_authenticated %}
+            {% if user.is_client %}
+                <a href="{% url 'cart:view_cart' %}">Panier</a>
+                <a href="{% url 'orders:order_list' %}">Mes commandes</a>
+            {% elif user.is_vendeur %}
+                <a href="{% url 'products:my_products' %}">Mes produits</a>
+                <a href="{% url 'orders:vendeur_order_list' %}">Commandes reçues</a>
+            {% endif %}
+            <a href="{% url 'accounts:dashboard' %}">Tableau de bord</a>
+            <a href="{% url 'accounts:profile' %}">
+                {{ user.username }}
+                <span class="badge role-{{ user.role|lower }}">{{ user.get_role_display }}</span>
+            </a>
+            <form method="post" action="{% url 'accounts:logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="background:none; border:none; color:white; cursor:pointer; margin-left:1rem; font-size:0.95rem; text-decoration:underline; padding:0;">Déconnexion</button>
+            </form>
+        {% else %}
+            <a href="{% url 'accounts:login' %}">Connexion</a>
+            <a href="{% url 'accounts:choose_role' %}">Créer un compte</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="container">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

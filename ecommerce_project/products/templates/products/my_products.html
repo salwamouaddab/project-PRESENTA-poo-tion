@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Mes produits{% endblock %}
+
+{% block content %}
+<div style="display:flex; justify-content:space-between; align-items:center;">
+    <h1>Mes produits</h1>
+    <a href="{% url 'products:product_create' %}" class="btn btn-primary">+ Ajouter un produit</a>
+</div>
+
+{% if products %}
+<table class="card">
+    <tr>
+        <th>Nom</th><th>Prix</th><th>Stock</th><th>Actif</th><th>Actions</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }} DH</td>
+        <td>{{ product.stock }}</td>
+        <td>{% if product.is_active %}✅{% else %}❌{% endif %}</td>
+        <td>
+            <a href="{% url 'products:product_update' product.slug %}" class="btn btn-outline btn-sm">Modifier</a>
+            <a href="{% url 'products:product_delete' product.slug %}" class="btn btn-danger btn-sm">Supprimer</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="empty-state">Vous n'avez encore ajouté aucun produit.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Mon panier{% endblock %}
+
+{% block content %}
+<h1>Mon panier</h1>
+
+{% if cart.items.all %}
+<table class="card">
+    <tr><th>Produit</th><th>Prix unitaire</th><th>Quantité</th><th>Sous-total</th><th></th></tr>
+    {% for item in cart.items.all %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.price }} DH</td>
+        <td>
+            <form method="post" action="{% url 'cart:update_cart_item' item.id %}" style="display:flex; gap:0.4rem;">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width:70px; margin:0;">
+                <button type="submit" class="btn btn-outline btn-sm">Mettre à jour</button>
+            </form>
+        </td>
+        <td>{{ item.subtotal }} DH</td>
+        <td>
+            <form method="post" action="{% url 'cart:remove_from_cart' item.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Retirer</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="card" style="max-width:320px; margin-top:1rem;">
+    <p><strong>Total : {{ cart.total }} DH</strong></p>
+    <a href="{% url 'orders:checkout' %}" class="btn btn-success">Valider la commande</a>
+</div>
+{% else %}
+<div class="empty-state">Votre panier est vide. <a href="{% url 'products:product_list' %}">Parcourir le catalogue</a></div>
+{% endif %}
+{% endblock %}

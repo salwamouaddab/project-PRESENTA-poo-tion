@@ -1,0 +1,146 @@
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+}
+
+.navbar {
+  background: var(--primary-dark);
+  color: white;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 0.95rem;
+}
+
+.navbar a:hover { text-decoration: underline; }
+
+.navbar .brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-left: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--border);
+  color: var(--text);
+}
+
+.badge.role-vendeur { background: #dbeafe; color: var(--primary-dark); }
+.badge.role-client { background: #dcfce7; color: var(--success); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--border);
+}
+
+.product-card h3 { margin: 0.6rem 0 0.2rem; font-size: 1rem; }
+.price { color: var(--primary); font-weight: 700; }
+
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+.btn-danger { background: var(--danger); color: white; }
+.btn-success { background: var(--success); color: white; }
+.btn-sm { padding: 0.3rem 0.7rem; font-size: 0.8rem; }
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 0.9rem;
+  font-size: 0.95rem;
+}
+
+form label { font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.25rem; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 0.6rem; border-bottom: 1px solid var(--border); }
+
+.status { padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.status-EN_ATTENTE { background: #fef3c7; color: var(--warning); }
+.status-CONFIRMEE { background: #dbeafe; color: var(--primary-dark); }
+.status-EXPEDIEE { background: #ede9fe; color: #6d28d9; }
+.status-LIVREE { background: #dcfce7; color: var(--success); }
+.status-ANNULEE { background: #fee2e2; color: var(--danger); }
+
+.messages { list-style: none; padding: 0; }
+.messages li {
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.7rem;
+  font-size: 0.9rem;
+}
+.messages .success { background: #dcfce7; color: #166534; }
+.messages .error { background: #fee2e2; color: #991b1b; }
+.messages .warning { background: #fef3c7; color: #92400e; }
+.messages .info { background: #dbeafe; color: #1e40af; }
+
+.role-choice { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; }
+.role-choice .card { text-align: center; width: 240px; }
+
+.empty-state { text-align: center; color: var(--muted); padding: 3rem 0; }

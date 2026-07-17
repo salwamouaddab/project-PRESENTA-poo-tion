@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Créer un compte{% endblock %}
+
+{% block content %}
+<h1>Créer un compte</h1>
+<p>Choisissez le type de compte que vous souhaitez créer.</p>
+
+<div class="role-choice">
+    <div class="card">
+        <h2>🛍️ Client</h2>
+        <p>Achetez des produits, gérez votre panier et suivez vos commandes.</p>
+        <a href="{% url 'accounts:signup_client' %}" class="btn btn-primary">Créer un compte client</a>
+    </div>
+    <div class="card">
+        <h2>🏪 Vendeur</h2>
+        <p>Créez votre boutique, publiez vos produits et gérez vos ventes.</p>
+        <a href="{% url 'accounts:signup_vendeur' %}" class="btn btn-primary">Créer un compte vendeur</a>
+    </div>
+</div>
+
+<p style="text-align:center; margin-top:2rem;">
+    Déjà un compte ? <a href="{% url 'accounts:login' %}">Se connecter</a>
+</p>
+{% endblock %}

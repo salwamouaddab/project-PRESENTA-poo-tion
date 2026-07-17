@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'products:product_list' %}">&larr; Retour au catalogue</a>
+
+<div class="card" style="max-width:600px; margin-top:1rem;">
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; max-height:320px; object-fit:cover; border-radius:8px;">
+    {% endif %}
+    <h1>{{ product.name }}</h1>
+    <p class="price" style="font-size:1.3rem;">{{ product.price }} DH</p>
+    <p>{{ product.description|default:"Aucune description fournie." }}</p>
+    <p style="color:var(--muted);">Vendu par <strong>{{ product.vendeur.vendor_profile.shop_name|default:product.vendeur.username }}</strong></p>
+    <p style="color:var(--muted);">Stock disponible : {{ product.stock }}</p>
+
+    {% if user.is_authenticated and user.is_client %}
+        <form method="post" action="{% url 'cart:add_to_cart' product.slug %}" style="display:flex; gap:0.5rem; align-items:center;">
+            {% csrf_token %}
+            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" style="width:80px; margin:0;">
+            <button type="submit" class="btn btn-primary" {% if not product.in_stock %}disabled{% endif %}>
+                {% if product.in_stock %}Ajouter au panier{% else %}Rupture de stock{% endif %}
+            </button>
+        </form>
+    {% elif not user.is_authenticated %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-primary">Se connecter pour acheter</a>
+    {% endif %}
+</div>
+{% endblock %}

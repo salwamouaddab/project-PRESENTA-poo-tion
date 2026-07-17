@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mon Chatbot</title>
+<style>
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: #0f1b1e;
+    color: #eaf3f1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+  }
+  .chat-wrap{
+    width: 500px;
+    background: #142a2d;
+    border-radius: 12px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    height: 600px;
+  }
+  header{
+    padding: 15px;
+    background: #1c3438;
+    font-weight:bold;
+  }
+  #messages{
+    flex:1;
+    overflow-y:auto;
+    padding: 15px;
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+  .msg{
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .msg.user{
+    align-self: flex-end;
+    background: #2fa88f;
+    color:#05201b;
+  }
+  .msg.bot{
+    align-self: flex-start;
+    background: #1c3438;
+  }
+  form{
+    display:flex;
+    padding: 12px;
+    gap: 8px;
+    background:#142a2d;
+  }
+  input{
+    flex:1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #0d1f22;
+    color:white;
+  }
+  button{
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #2fa88f;
+    color:#05201b;
+    font-weight:bold;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-wrap">
+  <header>Mon Chatbot 🤖</header>
+  <div id="messages"></div>
+  <form id="chat-form">
+    <input type="text" id="user-input" placeholder="Ecris ton message..." required>
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
+
+<script>
+const form = document.getElementById("chat-form");
+const input = document.getElementById("user-input");
+const messagesEl = document.getElementById("messages");
+
+function addMessage(text, sender){
+  const div = document.createElement("div");
+  div.className = "msg " + sender;
+  div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const text = input.value.trim();
+  if(!text) return;
+
+  addMessage(text, "user");
+  input.value = "";
+
+  try{
+    const res = await fetch("http://localhost:8000/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_id: "user1", message: text })
+    });
+    const data = await res.json();
+    addMessage(data.reply, "bot");
+  } catch(err){
+    addMessage("Erreur de connexion au serveur.", "bot");
+  }
+});
+</script>
+
+</body>
+</html>

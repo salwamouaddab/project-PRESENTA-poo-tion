@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord client{% endblock %}
+
+{% block content %}
+<h1>Bonjour {{ user.username }} 👋</h1>
+<p>Bienvenue sur votre espace client.</p>
+
+<div class="grid">
+    <div class="card">
+        <h3>🛒 Panier</h3>
+        <p>Consultez et modifiez les articles de votre panier.</p>
+        <a href="{% url 'cart:view_cart' %}" class="btn btn-outline">Voir mon panier</a>
+    </div>
+    <div class="card">
+        <h3>📦 Mes commandes</h3>
+        <p>Suivez l'état de vos commandes passées.</p>
+        <a href="{% url 'orders:order_list' %}" class="btn btn-outline">Voir mes commandes</a>
+    </div>
+    <div class="card">
+        <h3>🧾 Catalogue</h3>
+        <p>Parcourez les produits disponibles.</p>
+        <a href="{% url 'products:product_list' %}" class="btn btn-outline">Voir le catalogue</a>
+    </div>
+    <div class="card">
+        <h3>👤 Mon profil</h3>
+        <p>Modifiez vos informations personnelles.</p>
+        <a href="{% url 'accounts:profile' %}" class="btn btn-outline">Modifier mon profil</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Catalogue{% endblock %}
+
+{% block content %}
+<h1>Catalogue</h1>
+
+<form method="get" style="display:flex; gap:0.5rem; max-width:500px; margin-bottom:1.5rem;">
+    <input type="text" name="q" placeholder="Rechercher un produit..." value="{{ request.GET.q }}">
+    <select name="category" onchange="this.form.submit()">
+        <option value="">Toutes catégories</option>
+        {% for cat in categories %}
+            <option value="{{ cat.slug }}" {% if request.GET.category == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
+
+{% if products %}
+<div class="grid">
+    {% for product in products %}
+        <div class="card product-card">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <img src="https://via.placeholder.com/220x160?text=Produit" alt="{{ product.name }}">
+            {% endif %}
+            <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+            <p class="price">{{ product.price }} DH</p>
+            <p style="color:var(--muted); font-size:0.85rem;">Vendu par {{ product.vendeur.vendor_profile.shop_name|default:product.vendeur.username }}</p>
+            <a href="{{ product.get_absolute_url }}" class="btn btn-outline btn-sm">Voir le produit</a>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">Aucun produit trouvé.</div>
+{% endif %}
+{% endblock %}
