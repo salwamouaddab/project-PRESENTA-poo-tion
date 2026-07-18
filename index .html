@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salwa Mouaddab | Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Monsieur+La+Doulaise&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES ET RESET --- */
+        :root {
+            --bg-light: #fdfcf9;
+            --bg-creme: #fdf6e9;
+            --bg-beige: #f1ede4;
+            --brown: #a65215;
+            --orange-terra: #a65215;
+            --red-signature: #a65215;
+            --text-dark: #2d2926;
+            --text-grey: #8c857d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- STYLES REUTILISABLES --- */
+        .title-serif { font-family: 'Playfair Display', serif; color: var(--brown); }
+        .handwritten { font-family: 'Monsieur La Doulaise', cursive; color: var(--brown); }
+        .handwritten-red { font-family: 'Monsieur La Doulaise', cursive; color: var(--red-signature); }
+        section { min-height: 100vh; padding: 80px 10%; position: relative; }
+
+        /* --- 1. HERO --- */
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; background: #fff; }
+        .hero .title { font-size: 8rem; line-height: 0.9; margin-bottom: 10px; }
+        .hero .subtitle { font-size: 4rem; margin-top: -20px; }
+        .tagline { font-size: 1.2rem; color: var(--text-grey); margin-top: 20px; }
+
+        .arch-frame {
+            border-radius: 500px 500px 0 0;
+            overflow: hidden;
+            height: 75vh;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .arch-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        .bottom-bar {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 70px;
+            background: var(--bg-beige); display: flex; justify-content: space-between;
+            align-items: center; padding: 0 10%; font-size: 0.9rem;
+        }
+
+        /* --- 2. SOMMAIRE --- */
+        .sommaire { display: grid; grid-template-columns: 1fr 1fr; background: #fff; align-items: center; gap: 50px; }
+        .sommaire ul { list-style: none; }
+        .sommaire li {
+            display: flex; justify-content: space-between;
+            padding: 15px 0; border-bottom: 1px solid #eee; font-size: 1.1rem;
+        }
+        .shape-brown-leaf {
+            width: 150px; height: 150px; background-color: var(--brown);
+            mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M40,-60C50,-50,60,-40,70,-20C80,0,90,20,80,40C70,60,40,80,20,85C0,90,-20,80,-40,70C-60,60,-80,40,-85,20C-90,0,-80,-20,-70,-40C-60,-60,-40,-80,-20,-85C0,-90,20,-80,40,-60Z" transform="translate(100 100)"/></svg>');
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M40,-60C50,-50,60,-40,70,-20C80,0,90,20,80,40C70,60,40,80,20,85C0,90,-20,80,-40,70C-60,60,-80,40,-85,20C-90,0,-80,-20,-70,-40C-60,-60,-40,-80,-20,-85C0,-90,20,-80,40,-60Z" transform="translate(100 100)"/></svg>');
+            mask-repeat: no-repeat; margin-top: 20px;
+        }
+
+        /* --- 3. INTRODUCTION --- */
+        .intro { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; }
+        .highlight-box {
+            background: white; color: var(--brown); padding: 25px;
+            border-radius: 40px 40px 40px 0; margin-top: 30px; font-weight: 300;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+        .intro-image { height: 75vh; border-radius: 20px; overflow: hidden; }
+        .intro-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- 4. PROJETS --- */
+        .projets { background-color: var(--bg-beige); }
+        .projets-intro { max-width: 700px; margin: 0 auto 50px; text-align: center; }
+        .projets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 20px 20px 20px 0;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .card img { width: 100%; height: 170px; object-fit: cover; }
+        .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .card-body h4 { font-family: 'Playfair Display', serif; color: var(--brown); font-size: 1.2rem; margin-bottom: 8px; }
+        .card-body p { font-size: 0.9rem; color: var(--text-grey); flex: 1; }
+        .card-tag {
+            display: inline-block; margin-top: 12px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; color: var(--brown);
+        }
+        .btn-accessoire {
+            display: inline-block; margin-top: 25px; color: var(--brown);
+            text-decoration: none; font-family: 'Playfair Display', serif; font-size: 1.3rem;
+            border-bottom: 1px solid var(--brown); transition: 0.3s;
+        }
+        .btn-accessoire:hover { letter-spacing: 1px; }
+
+        /* --- 5. CONTACT --- */
+        .contact { background-color: var(--bg-light); text-align: center; display: flex; flex-direction: column; justify-content: center; }
+        .contact-title { font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--orange-terra); letter-spacing: 12px; text-transform: uppercase; }
+        .contact-info { margin-top: 40px; font-size: 1.3rem; }
+        .contact-info a { text-decoration: none; color: inherit; display: block; margin: 10px 0; }
+        .contact-info a:hover { color: var(--brown); }
+
+        /* --- 6. MERCI --- */
+        .thanks { background-color: var(--bg-light); text-align: center; padding: 100px 0; min-height: auto; }
+        .thanks h2 { font-size: 8rem; margin-bottom: 0; }
+
+        .page-num { position: absolute; bottom: 30px; left: 10%; font-weight: bold; color: var(--brown); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero, .sommaire, .intro { grid-template-columns: 1fr; text-align: center; }
+            .hero .title { font-size: 4rem; }
+            .arch-frame, .intro-image { height: 400px; margin: 30px auto; }
+            .bottom-bar { flex-direction: column; height: auto; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HERO -->
+    <section class="hero" id="accueil">
+        <div class="content">
+            <h1 class="title title-serif">Portfolio</h1>
+            <h2 class="handwritten">Développeuse Digitale</h2>
+            <p class="tagline">Etudiante en Développement Digital</p>
+        </div>
+        <div class="image-container">
+            <div class="arch-frame">
+                <svg width="100%" height="100%" viewBox="0 0 680 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration éditoriale d'une développeuse">
+                    <defs>
+                        <clipPath id="archClip"><path d="M90 700 L90 340 C90 150 250 60 340 60 C430 60 590 150 590 340 L590 700 Z"/></clipPath>
+                    </defs>
+                    <path d="M90 700 L90 340 C90 150 250 60 340 60 C430 60 590 150 590 340 L590 700 Z" fill="#f1ede4"/>
+                    <g clip-path="url(#archClip)">
+                        <rect x="90" y="60" width="500" height="640" fill="#fdf6e9"/>
+                        <circle cx="340" cy="330" r="220" fill="#f6e2c8"/>
+                        <path d="M170 700 C170 520 220 430 340 430 C460 430 510 520 510 700 Z" fill="#a65215"/>
+                        <ellipse cx="340" cy="270" rx="95" ry="105" fill="#e6b98c"/>
+                        <path d="M255 240 C245 130 300 95 340 95 C385 95 435 135 425 245 C425 190 400 175 340 175 C280 175 255 190 255 245 Z" fill="#5b3a29"/>
+                        <path d="M250 245 C235 300 245 360 265 390 C255 340 258 280 265 245 Z" fill="#5b3a29"/>
+                        <path d="M430 245 C445 300 435 360 415 390 C425 340 422 280 415 245 Z" fill="#5b3a29"/>
+                        <circle cx="305" cy="270" r="6" fill="#2d2926"/>
+                        <circle cx="375" cy="270" r="6" fill="#2d2926"/>
+                        <path d="M320 305 Q340 318 360 305" stroke="#8c5a3a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <rect x="270" y="470" width="140" height="95" rx="6" fill="#2d2926"/>
+                        <rect x="278" y="478" width="124" height="72" rx="2" fill="#f6e2c8"/>
+                        <text x="340" y="520" text-anchor="middle" font-family="monospace" font-size="20" fill="#a65215" font-weight="700">&lt;/&gt;</text>
+                    </g>
+                    <path d="M90 700 L90 340 C90 150 250 60 340 60 C430 60 590 150 590 340 L590 700" fill="none" stroke="#a65215" stroke-width="3"/>
+                    <g transform="translate(120,600)">
+                        <path d="M40,-60C50,-50,60,-40,70,-20C80,0,90,20,80,40C70,60,40,80,20,85C0,90,-20,80,-40,70C-60,60,-80,40,-85,20C-90,0,-80,-20,-70,-40C-60,-60,-40,-80,-20,-85C0,-90,20,-80,40,-60Z" fill="#a65215" opacity="0.85" transform="scale(0.55)"/>
+                    </g>
+                    <g transform="translate(560,150)">
+                        <path d="M40,-60C50,-50,60,-40,70,-20C80,0,90,20,80,40C70,60,40,80,20,85C0,90,-20,80,-40,70C-60,60,-80,40,-85,20C-90,0,-80,-20,-70,-40C-60,-60,-40,-80,-20,-85C0,-90,20,-80,40,-60Z" fill="#e6b98c" opacity="0.9" transform="scale(0.4)"/>
+                    </g>
+                    <circle cx="600" cy="620" r="10" fill="#a65215"/>
+                    <circle cx="90" cy="140" r="7" fill="#a65215"/>
+                </svg>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <div><strong>Salwa Mouaddab</strong> - 2026</div>
+            <div>github.com/salwamouaddab</div>
+        </div>
+        <div class="page-num">01</div>
+    </section>
+
+    <!-- 2. SOMMAIRE -->
+    <section class="sommaire" id="sommaire">
+        <div class="sommaire-left">
+            <h2 class="title-serif">Sommaire</h2>
+            <div class="shape-brown-leaf"></div>
+        </div>
+        <div class="sommaire-right">
+            <ul>
+                <li><span>Introduction</span> <span>03</span></li>
+                <li><span>Ma vision et mission</span> <span>04</span></li>
+                <li><span>Mes projets</span> <span>05</span></li>
+                <li><span>Contact</span> <span>06</span></li>
+            </ul>
+        </div>
+        <div class="page-num">02</div>
+    </section>
+
+    <!-- 3. INTRODUCTION -->
+    <section class="intro" id="introduction">
+        <div class="intro-text">
+            <h2 class="title-serif">Introduction</h2>
+            <h3 class="handwritten">Bienvenue dans mon univers créatif</h3>
+            <p>Je suis Salwa Mouaddab, stagiaire passionnée en Développement Digital. Mon univers se situe à l'intersection du code et de la créativité. Je m'efforce de transformer des concepts complexes en interfaces fluides et performantes. Curieuse de nature et rigoureuse dans mon travail, mon parcours en développement me permet de concevoir des solutions numériques modernes qui répondent aux besoins des utilisateurs tout en respectant les standards du web.</p>
+            <div class="highlight-box">
+                "Parcourez mes projets pour voir comment je donne vie à des idées à travers des solutions logicielles et web performantes."
+            </div>
+        </div>
+        <div class="intro-image">
+            <svg width="100%" height="100%" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration d'un bureau de travail">
+                <rect width="500" height="500" fill="#fdf6e9"/>
+                <rect x="60" y="300" width="380" height="14" rx="4" fill="#a65215"/>
+                <rect x="90" y="314" width="20" height="90" fill="#8c5a3a"/>
+                <rect x="390" y="314" width="20" height="90" fill="#8c5a3a"/>
+                <rect x="120" y="190" width="260" height="110" rx="6" fill="#2d2926"/>
+                <rect x="130" y="200" width="240" height="90" rx="2" fill="#f6e2c8"/>
+                <text x="250" y="252" text-anchor="middle" font-family="monospace" font-size="26" fill="#a65215" font-weight="700">&lt;/&gt;</text>
+                <rect x="220" y="300" width="60" height="12" fill="#8c5a3a"/>
+                <rect x="330" y="240" width="70" height="60" rx="4" fill="#e6b98c"/>
+                <circle cx="365" cy="260" r="10" fill="#a65215"/>
+                <rect x="345" y="278" width="40" height="6" rx="2" fill="#a65215"/>
+                <circle cx="150" cy="255" r="22" fill="#e6b98c"/>
+                <rect x="140" y="270" width="20" height="30" fill="#a65215"/>
+                <path d="M40,-60C50,-50,60,-40,70,-20C80,0,90,20,80,40C70,60,40,80,20,85C0,90,-20,80,-40,70C-60,60,-80,40,-85,20C-90,0,-80,-20,-70,-40C-60,-60,-40,-80,-20,-85C0,-90,20,-80,40,-60Z" fill="#a65215" opacity="0.15" transform="translate(420,100) scale(0.5)"/>
+            </svg>
+        </div>
+        <div class="page-num">03</div>
+    </section>
+
+    <!-- 4. PROJETS -->
+    <section class="projets" id="projets">
+        <div class="projets-intro">
+            <h2 class="title-serif">Mes projets</h2>
+            <h3 class="handwritten">Réalisés avec amour et bienveillance</h3>
+            <p>Cliquez sur un projet pour voir le code source sur GitHub.</p>
+        </div>
+
+        <div class="projets-grid">
+
+            <a class="card" href="tajriba.html" target="_blank" rel="noopener">
+                <img src="https://www.casablancax.com/wp-content/uploads/2024/01/7FF4563E-197F-422E-A718-D2EF43E7C33C-scaled.jpeg" alt="Projet Mobile" style="width:100%;height:170px;object-fit:cover;">
+                <div class="card-body">
+                    <h4>Site Accessoires</h4>
+                    <p>Mon site web d'accessoires, réalisé en HTML/CSS.</p>
+                    <span class="card-tag">Voir le site →</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://github.com/salwamouaddab/project-PRESENTA-poo-tion/tree/main/ecommerce_project" target="_blank" rel="noopener">
+                <svg width="100%" height="170" viewBox="0 0 260 170" role="img" aria-label="Illustration panier e-commerce">
+                    <rect width="260" height="170" fill="#f1ede4"/>
+                    <path d="M95 65 L95 50 C95 35 105 25 118 25 L142 25 C155 25 165 35 165 50 L165 65" fill="none" stroke="#a65215" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M75 65 L185 65 L175 135 C174 141 168 145 162 145 L98 145 C92 145 86 141 85 135 Z" fill="#a65215"/>
+                    <circle cx="112" cy="152" r="9" fill="#2d2926"/>
+                    <circle cx="152" cy="152" r="9" fill="#2d2926"/>
+                    <rect x="100" y="85" width="60" height="8" rx="4" fill="#f6e2c8"/>
+                    <rect x="100" y="100" width="40" height="8" rx="4" fill="#f6e2c8"/>
+                </svg>
+                <div class="card-body">
+                    <h4>E-commerce Project</h4>
+                    <p>Application de commerce en ligne développée en Python (POO).</p>
+                    <span class="card-tag">Voir sur GitHub →</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://github.com/salwamouaddab/project-PRESENTA-poo-tion/tree/main/price-comparison-app" target="_blank" rel="noopener">
+                <svg width="100%" height="170" viewBox="0 0 260 170" role="img" aria-label="Illustration balance de comparaison de prix">
+                    <rect width="260" height="170" fill="#f1ede4"/>
+                    <rect x="127" y="35" width="6" height="95" fill="#a65215"/>
+                    <line x1="70" y1="55" x2="190" y2="55" stroke="#a65215" stroke-width="4"/>
+                    <path d="M50 55 L70 55 L60 90 Q50 100 40 90 Z" fill="none" stroke="#a65215" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="M170 55 L190 55 L200 100 Q180 110 160 100 Z" fill="none" stroke="#a65215" stroke-width="4" stroke-linejoin="round"/>
+                    <rect x="95" y="130" width="70" height="14" rx="4" fill="#a65215"/>
+                    <text x="50" y="85" text-anchor="middle" font-size="16" fill="#8c5a3a" font-weight="700">$</text>
+                    <text x="200" y="95" text-anchor="middle" font-size="16" fill="#8c5a3a" font-weight="700">€</text>
+                </svg>
+                <div class="card-body">
+                    <h4>Price Comparison App</h4>
+                    <p>Application de comparaison de prix entre produits.</p>
+                    <span class="card-tag">Voir sur GitHub →</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://github.com/salwamouaddab/project-PRESENTA-poo-tion/blob/main/calculatrice_pyqt.py" target="_blank" rel="noopener">
+                <svg width="100%" height="170" viewBox="0 0 260 170" role="img" aria-label="Illustration calculatrice">
+                    <rect width="260" height="170" fill="#f1ede4"/>
+                    <rect x="90" y="25" width="80" height="120" rx="10" fill="#2d2926"/>
+                    <rect x="98" y="35" width="64" height="30" rx="3" fill="#f6e2c8"/>
+                    <text x="152" y="57" text-anchor="end" font-family="monospace" font-size="16" fill="#a65215" font-weight="700">42</text>
+                    <g fill="#a65215">
+                        <rect x="98" y="75" width="14" height="14" rx="3"/>
+                        <rect x="120" y="75" width="14" height="14" rx="3"/>
+                        <rect x="142" y="75" width="14" height="14" rx="3"/>
+                        <rect x="98" y="97" width="14" height="14" rx="3"/>
+                        <rect x="120" y="97" width="14" height="14" rx="3"/>
+                        <rect x="142" y="97" width="14" height="14" rx="3"/>
+                        <rect x="98" y="119" width="14" height="14" rx="3"/>
+                        <rect x="120" y="119" width="14" height="14" rx="3"/>
+                        <rect x="142" y="119" width="14" height="14" rx="3"/>
+                    </g>
+                </svg>
+                <div class="card-body">
+                    <h4>Calculatrice PyQt</h4>
+                    <p>Calculatrice avec interface graphique réalisée en Python / PyQt.</p>
+                    <span class="card-tag">Voir sur GitHub →</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://github.com/salwamouaddab/project-PRESENTA-poo-tion/blob/main/antivirus_basique.py" target="_blank" rel="noopener">
+                <svg width="100%" height="170" viewBox="0 0 260 170" role="img" aria-label="Illustration bouclier antivirus">
+                    <rect width="260" height="170" fill="#f1ede4"/>
+                    <path d="M130 25 L180 42 L180 90 C180 125 158 145 130 155 C102 145 80 125 80 90 L80 42 Z" fill="#a65215"/>
+                    <path d="M110 90 L124 106 L152 72" fill="none" stroke="#f6e2c8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="card-body">
+                    <h4>Antivirus Basique</h4>
+                    <p>Script Python de détection basique de fichiers suspects.</p>
+                    <span class="card-tag">Voir sur GitHub →</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://github.com/salwamouaddab/project-PRESENTA-poo-tion/blob/main/nettoyeur_fichiers_vides.py" target="_blank" rel="noopener">
+                <svg width="100%" height="170" viewBox="0 0 260 170" role="img" aria-label="Illustration nettoyage de dossier">
+                    <rect width="260" height="170" fill="#f1ede4"/>
+                    <path d="M60 55 L110 55 L120 68 L200 68 L200 130 C200 136 195 141 189 141 L71 141 C65 141 60 136 60 130 Z" fill="#a65215"/>
+                    <rect x="60" y="68" width="140" height="10" fill="#8c5a3a"/>
+                    <line x1="120" y1="95" x2="140" y2="115" stroke="#f6e2c8" stroke-width="6" stroke-linecap="round"/>
+                    <line x1="140" y1="95" x2="120" y2="115" stroke="#f6e2c8" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+                <div class="card-body">
+                    <h4>Nettoyeur de Fichiers Vides</h4>
+                    <p>Script Python qui détecte et supprime les fichiers vides d'un dossier.</p>
+                    <span class="card-tag">Voir sur GitHub →</span>
+                </div>
+            </a>
+
+            <a class="card" href="https://github.com/salwamouaddab/project-PRESENTA-poo-tion" target="_blank" rel="noopener">
+                <svg width="100%" height="170" viewBox="0 0 260 170" role="img" aria-label="Illustration dépôt de projets">
+                    <rect width="260" height="170" fill="#f1ede4"/>
+                    <rect x="75" y="40" width="110" height="90" rx="6" fill="#2d2926"/>
+                    <rect x="83" y="50" width="94" height="70" rx="3" fill="#f6e2c8"/>
+                    <text x="130" y="95" text-anchor="middle" font-family="monospace" font-size="20" fill="#a65215" font-weight="700">&lt;/&gt;</text>
+                    <circle cx="130" cy="35" r="8" fill="#a65215"/>
+                    <line x1="130" y1="43" x2="130" y2="40" stroke="#a65215" stroke-width="4"/>
+                </svg>
+                <div class="card-body">
+                    <h4>Tous mes projets</h4>
+                    <p>Le dépôt GitHub complet regroupant tous mes projets réalisés.</p>
+                    <span class="card-tag">Voir le dépôt →</span>
+                </div>
+            </a>
+
+        </div>
+        <div class="page-num">05</div>
+    </section>
+
+    <!-- 5. CONTACT -->
+    <section class="contact" id="contact">
+        <h2 class="contact-title">CONTACTEZ</h2>
+        <h3 class="handwritten-red">moi</h3>
+        <div class="contact-info">
+            <a href="tel:+212656376212">📞 +212 656376212</a>
+            <a href="mailto:mouaddab.salwa@email.com">✉️ mouaddab.salwa@email.com</a>
+            <a href="https://github.com/salwamouaddab" target="_blank" rel="noopener">💻 github.com/salwamouaddab</a>
+        </div>
+        <div class="page-num">06</div>
+    </section>
+
+    <!-- 6. MERCI -->
+    <footer class="thanks">
+        <h2 class="handwritten-red">Merci</h2>
+        <p style="letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem;">Salwa Mouaddab</p>
+    </footer>
+
+</body>
+</html>
